@@ -24,15 +24,19 @@
 # car.print_passengers()
 
 import random
+
+
 class Human:
     def __init__(self, name='Human', job=None, home=None, car=None):
         self.name = name
         self.job = job
         self.home = home
         self.car = car
+        self.gun = gun
         self.money = 100
         self.gladness = 50
         self.satiety = 50
+
     def get_job(self):
         if self.car.drive():
             pass
@@ -40,8 +44,18 @@ class Human:
             self.to_repair()
             return
         self.job = Job(job_list)
+
+    def get_gun(self):
+        if self.gun.shoot():
+            pass
+        else:
+            self.to_repair()
+            return
+        self.gun = Gun(gun_list)
+
     def get_car(self):
         self.car = Auto(brands_of_car)
+
     def get_home(self):
         self.home = House()
 
@@ -54,6 +68,7 @@ class Human:
                 return
             self.satiety += 5
             self.home.food -= 5
+
     def work(self):
         if self.car.drive():
             pass
@@ -67,6 +82,7 @@ class Human:
         self.money += self.job.salary
         self.gladness -= self.job.gladness
         self.satiety -= 5
+
     def shopping(self, manage):
         if self.car.drive():
             pass
@@ -85,12 +101,15 @@ class Human:
             self.money -= 20
             self.satiety += 5
             self.gladness += 2
+
     def chill(self):
         self.gladness += 10
         self.home.mess += 5
+
     def clean_home(self):
         self.gladness -= 5
         self.home.mess = 0
+
     def to_repair(self):
         self.car.strength += 100
         self.money -= 100
@@ -124,6 +143,7 @@ class Human:
         if self.money < -500:
             print('Bankrupt...')
             return False
+
     def live(self, day):
         if self.is_alive() == False:
             return False
@@ -136,6 +156,7 @@ class Human:
         if self.job is None:
             self.get_job()
             print(f"")
+
 
 class Auto:
     def __init__(self, brand_list):
@@ -154,11 +175,28 @@ class Auto:
             return False
 
 
-
 class House:
     def __init__(self):
         self.food = 0
         self.mess = 0
+
+
+class Gun:
+    def __init__(self, gun_list):
+        self.gun = random.choice(list(gun_list))
+        self.bullet = gun_list[self.gun]['bullet']
+        self.speed = gun_list[self.gun]['speed']
+        self.weight = gun_list[self.gun]['weight']
+        self.length = gun_list[self.gun]['length']
+
+    def shoot(self):
+        if self.bullet == 0
+            print('The gun cannot shoot')
+            return False
+
+gun_list = {"Glock-18": {'bullet': 20, 'speed': 350, 'weight': 0, 90, 'length': 233},
+            "Five-seveN": {'bullet': 20, 'speed': 625, 'weight': 0, 744, 'length': 208},
+            "USP": {'bullet': 12, 'speed': 350, 'weight': 0, 748, 'length': 194}}
 
 class Job:
     def __init__(self, job_list):
